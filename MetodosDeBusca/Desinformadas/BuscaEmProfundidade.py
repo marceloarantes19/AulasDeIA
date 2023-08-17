@@ -8,16 +8,20 @@ class BuscaEmProdundidade:
     topo = 0
     while len(pilha)>0:
       atual = pilha[topo]
+      print("Estou em", atual.getNome())
       if atual == d:
         self.mostraCaminho(topo, pilha, pai)
         return True
-      elif atual.getEstado() == 0 and not (atual in visitado):
+      elif atual.getEstado() == 0 and not atual in visitado:
         atual.setEstado(1)
         sucessores = g.getSucessor(atual)
+        sucessoresValidos = 0
         for i in sucessores:
-          pilha.append(i)
-          pai.append(topo)
-        topo = topo + len(sucessores)
+          if not i in visitado:
+            pilha.append(i)
+            pai.append(topo)
+            sucessoresValidos = sucessoresValidos + 1
+        topo = topo + sucessoresValidos
         visitado.append(atual)
       else:
         pilha.pop()

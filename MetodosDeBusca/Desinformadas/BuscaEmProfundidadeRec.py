@@ -13,12 +13,13 @@ class BuscaEmProdundidadeRec:
 
   def profundidade(self, atual, destino, g, visitado, caminho):
     if atual == destino:
+      print("Achei o maldito")
       return True, caminho
     elif not (atual in visitado):
       visitado.append(atual)
       for i in g.getSucessor(atual):
         if not i in visitado:
-          ret = self.profundidade(i, destino, g, visitado, caminho) # Chamada Recursiva
+          ret, caminho = self.profundidade(i, destino, g, visitado, caminho) # Chamada Recursiva
           if ret:
             caminho.append(i)
             return True, caminho
